@@ -1,0 +1,38 @@
+.logo {
+    width: 174px;
+    color: black;
+}
+
+.stories {
+    display: flex;
+    justify-content: space-between;
+}
+
+.story__avatar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 92px;
+    width: 92px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #A6328D;
+    margin-bottom: 10px;
+}
+
+.story__avatar-img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.topline {
+    margin-bottom: 32px;
+}
+
+.c-feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

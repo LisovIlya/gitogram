@@ -1,0 +1,38 @@
+.post-wrapper {
+    margin-bottom: 24px;
+}
+
+.post__user-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.post__avatar-wrapper {
+    width: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.post__repository-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 173px;
+    min-width: 979px;
+    padding: 24px 20px;
+    border: 1px solid #F1F1F1;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.post__username {
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 14px;
+}
+
+.comments {
+    margin-bottom: 10px;
+}

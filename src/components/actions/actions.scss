@@ -1,0 +1,67 @@
+.star__img {
+    height: 18px;
+    width: 16px;
+    color: black;
+    margin-right: 4px;
+}
+
+.fork__img {
+    height: 18px;
+    width: 16px;
+    color: black;
+    margin-right: 4px;
+}
+
+.actions-wrapper {
+    display: flex;
+}
+
+.star {
+    display: flex;
+    height: 28px;
+}
+
+.star__btn {
+    
+    height: 28px;
+    width: 73px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FAFBFC;
+    border-radius: 6px 0px 0px 6px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+}
+
+.star__info {
+    padding: 0 12px;
+    border-bottom: 1px solid rgba(27, 31, 35, 0.15);
+    border-top: 1px solid rgba(27, 31, 35, 0.15);
+    border-right: 1px solid rgba(27, 31, 35, 0.15);
+
+
+}
+
+.fork {
+    display: flex;
+    align-items: center;
+    
+}
+
+.fork__btn {
+    width: 72px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FAFBFC;
+    border-bottom: 1px solid rgba(27, 31, 35, 0.15);
+    border-top: 1px solid rgba(27, 31, 35, 0.15);
+}
+
+.fork__info {
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 0px 6px 6px 0px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+}

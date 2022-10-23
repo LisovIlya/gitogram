@@ -1,0 +1,52 @@
+[
+    {
+        "id": "0",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "One"
+    },
+    {
+        "id": "1",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Two"
+    },
+    {
+        "id": "2",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Three"
+    },
+    {
+        "id": "3",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Four"
+    },
+    {
+        "id": "4",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Five"
+    },
+    {
+        "id": "5",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Six"
+    },
+    {
+        "id": "6",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Seven"
+    },
+    {
+        "id": "7",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Eight"
+    },
+    {
+        "id": "8",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Nine"
+    },
+    {
+        "id": "9",
+        "avatar": "https://picsum.photos/300/300",
+        "username": "Ten"
+    }
+]

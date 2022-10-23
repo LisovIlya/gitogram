@@ -1,0 +1,29 @@
+.control-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.control-item {
+    margin-right: 20px;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.home {
+    color: black;
+    height: 32px;
+    width: 32px;
+}
+
+.user__avatar-wrapper {
+    width: 37px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.signout {
+    color: black;
+    height: 32px;
+    width: 32px;
+}
