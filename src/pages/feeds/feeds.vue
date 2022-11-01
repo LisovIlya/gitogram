@@ -44,9 +44,13 @@ import { user } from '../../components/user'
 import { icon } from '../../icons'
 import { post } from '../../components/post'
 import { actions } from '../../components/actions'
+import * as api from '../../api'
 
 export default {
   name: 'feeds',
+  created () {
+    api.trandings.getTrendings()
+  },
   components: {
     topline,
     control,

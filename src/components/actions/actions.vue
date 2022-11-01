@@ -1,22 +1,26 @@
 <template>
     <div class="actions-wrapper">
-        <div class="star">
-            <button class="star__btn">
+        <div class="star actions__item">
+            <button class="star__btn item__btn">
               <div class="star__img">
                 <icon name="star" />
               </div>
               <div class="star__name">Star</div>
             </button>
-            <div class="star__info">{{starCount}}</div>
+            <div class="star__info-wrapper item__info-wrapper">
+              <div class="star__info item__info">{{starCount}}</div>
+            </div>
         </div>
-        <div class="fork">
-            <button class="fork__btn">
+        <div class="fork actions__item">
+            <button class="fork__btn item__btn">
               <div class="fork__img">
                 <icon name="fork" />
               </div>
               <div class="fork__name">Fork</div>
             </button>
-            <div class="fork__info">{{forkCount}}</div>
+            <div class="fork__info-wrapper item__info-wrapper">
+              <div class="fork__info item__info">{{forkCount}}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -25,20 +29,11 @@
 import { icon } from '../../icons/'
 
 export default {
-  name: 'acrions',
+  name: 'actions',
   components: {
     icon
   },
-  props: {
-    starCount: {
-      type: Number,
-      required: true
-    },
-    forkCount: {
-      type: Number,
-      required: true
-    }
-  }
+  props: ['starCount', 'forkCount']
 }
 </script>
 

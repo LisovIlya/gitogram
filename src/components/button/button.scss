@@ -1,0 +1,13 @@
+.follow-btn {
+    min-height: 44px;
+    min-width: 270px;
+    border-radius: 5px;
+    background: #31AE54;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    padding: 0 10px;
+    &:hover {
+        background: #9E9E9E;
+    }
+}
