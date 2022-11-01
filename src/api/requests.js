@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'https://api.gitgub.com'
+  baseURL: 'https://api.github.com'
 })
 
 export const makeRequest = ({

@@ -13,10 +13,10 @@ export const getTrendings = (lang = 'javascript') => {
     addStartingZero(weekAgo.getDate())
   ].join('-')
 
-  params.append('q', `language:${lang} created:>${formattedDate}`)
   params.append('order', 'desc')
   params.append('sort', 'stars')
   params.append('per_page', 10)
+  params.append('q', `language:${lang} created:>${formattedDate}`)
 
   return makeRequest({
     url: `/search/repositories/${params}`
