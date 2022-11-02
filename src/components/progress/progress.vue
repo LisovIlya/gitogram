@@ -15,14 +15,11 @@ export default {
   emits: ['onFinish'],
   methods: {
     emitOnFinish () {
-      this.$emit('onFifish')
+      this.$emit('onFinish')
     }
   },
   mounted () {
-    // this.$nextTick(() => {
-    //   this.active = true
-    // })
-    document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
       this.active = true
     })
     this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)

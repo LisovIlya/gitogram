@@ -4,10 +4,10 @@
             :usernameClass="'post__username'"
             :userWrapper="'post__user-wrapper'"
             :avatarWrapper="'post__avatar-wrapper'"
-            :avatarUrl="profile.avatar"
+            :avatarUrl="avatarUrl"
             :avatarImg="'post__avatar-img'"
-            :username="profile.username"
-            @onPress="handlePress(story.id)"
+            :username="username"
+            @onPress="handlePress(id)"
             :isShown="true"
         />
         <div class="post__repository-wrapper">
@@ -33,6 +33,18 @@ import { comment } from '../comment'
 
 export default {
   name: 'Post',
+  props: {
+    avatarUrl: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String
+    },
+    id: {
+      type: Number
+    }
+  },
   components: {
     comment,
     toggler,

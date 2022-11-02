@@ -1,7 +1,7 @@
 <template>
     <div class="story-item-wrapper">
       <div class="story-item__top-container">
-          <xProgress />
+          <xProgress @on-finish="emitOnFinish"/>
           <user
               :usernameClass="'story-item__username'"
               :userWrapper="'story-item__user-wrapper'"
@@ -39,6 +39,12 @@ export default {
     return {
       profiles,
       profile: profiles[3]
+    }
+  },
+  emits: ['onFinish'],
+  methods: {
+    emitOnFinish () {
+      this.$emit('onFinish')
     }
   }
 }

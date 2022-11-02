@@ -19,6 +19,6 @@ export const getTrendings = (lang = 'javascript') => {
   params.append('q', `language:${lang} created:>${formattedDate}`)
 
   return makeRequest({
-    url: `/search/repositories/${params}`
+    url: `/search/repositories?${params}`
   })
 }

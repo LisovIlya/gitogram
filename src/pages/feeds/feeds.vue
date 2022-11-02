@@ -5,17 +5,17 @@
                 <div class="logo">
                   <icon name="logo" />
                 </div>
-                <control />
+                <control :avatarUrl="items[1].owner.avatar_url"/>
             </template>
             <template #content>
                 <ul class="stories">
-                    <li class="stories-item story" v-for="story in stories" :key="story.id" >
+                    <li class="stories-item story" v-for="item in items" :key="item.id" >
                         <user
                             :avatarWrapper="'story__avatar-wrapper'"
-                            :avatarUrl="story.avatar"
+                            :avatarUrl="item.owner.avatar_url"
                             :avatarImg="'story__avatar-img'"
-                            :username="story.username"
-                            @onPress="handlePress(story.id)"
+                            :username="item.owner.login"
+                            @onPress="handlePress(item.id)"
                             :isShown="true"
                         />
                     </li>
@@ -23,17 +23,23 @@
             </template>
         </topline>
     </div>
-    <div class="c-feed">
-        <post v-for="n in 5" :key="n">
+    <ul class="feeds">
+      <li class="feed" v-for="item in items" :key="item.id">
+        <post
+        :avatarUrl="item.owner.avatar_url"
+        :username="item.owner.login"
+        :id="item.id"
+        >
           <template #repository>
             <div class="repository-description">
-              <h1 class="repository-name">{{repName}}</h1>
-              <p class="repository-description">{{repDesc}}</p>
+              <h1 class="repository-name">{{item.name}}</h1>
+              <p class="repository-description">{{item.description}}</p>
             </div>
-            <actions starCount="142" forkCount="3" />
+            <actions :starCount="item.stargazers_count" :forkCount="item.forks_count" />
           </template>
         </post>
-    </div>
+      </li>
+    </ul>
 </template>
 
 <script>
@@ -48,9 +54,6 @@ import * as api from '../../api'
 
 export default {
   name: 'feeds',
-  created () {
-    api.trandings.getTrendings()
-  },
   components: {
     topline,
     control,
@@ -63,7 +66,17 @@ export default {
     return {
       stories,
       repName: 'Vue.js',
-      repDesc: 'JavaScript framework for building interactive web applications ⚡'
+      repDesc: 'JavaScript framework for building interactive web applications ⚡',
+      items: []
+    }
+  },
+  methods: {},
+  async created () {
+    try {
+      const { data } = await api.trandings.getTrendings()
+      this.items = data.items
+    } catch (error) {
+      console.log(error)
     }
   }
 }

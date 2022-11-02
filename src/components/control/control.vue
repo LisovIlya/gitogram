@@ -6,7 +6,7 @@
         <div class="control-item user">
           <user
             :avatarWrapper="'user__avatar-wrapper'"
-            :avatarUrl="stories[2].avatar"
+            :avatarUrl="avatarUrl"
           />
         </div>
         <div class="control-item signout">
@@ -18,18 +18,18 @@
 <script>
 import { icon } from '../../icons'
 import { user } from '../user'
-import stories from '../../pages/feeds/data.json'
 
 export default {
   name: 'control',
+  props: {
+    avatarUrl: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     icon,
     user
-  },
-  data () {
-    return {
-      stories
-    }
   }
 }
 </script>

@@ -11,6 +11,7 @@
 
 export default {
   name: 'User',
+  emits: ['onPress'],
   props: {
     usernameClass: {
       type: String,
