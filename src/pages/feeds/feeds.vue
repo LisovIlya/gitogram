@@ -1,10 +1,14 @@
 <template>
+    <div>{{isFemale}}</div>
+    <h1 v-if="user.loading">loading...</h1>
+    <h1 v-else-if="user.error">{{ user.error }}</h1>
+    <pre v-else-if="user.data">{{user.data}}</pre>
     <div class="topline">
         <topline>
             <template #headline>
-                <div class="logo">
+                <button @click="trigger" class="logo">
                   <icon name="logo" />
-                </div>
+                </button>
                 <control :avatarUrl="items[1].owner.avatar_url"/>
             </template>
             <template #content>
@@ -51,6 +55,7 @@ import { icon } from '../../icons'
 import { post } from '../../components/post'
 import { actions } from '../../components/actions'
 import * as api from '../../api'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'feeds',
@@ -70,10 +75,24 @@ export default {
       items: []
     }
   },
-  methods: {},
+  computed: {
+    ...mapState({
+      user: state => state.user.user
+    }),
+    ...mapGetters({
+      isFemale: 'user/getIfUserIsFemale'
+    })
+  },
+  methods: {
+    ...mapActions('user', ['fetchUser', 'fetchMethod']),
+    trigger () {
+      this.fetchMethod('Hello World')
+      this.fetchUser()
+    }
+  },
   async created () {
     try {
-      const { data } = await api.trandings.getTrendings()
+      const { data } = await api.trendings.getTrendings()
       this.items = data.items
     } catch (error) {
       console.log(error)
