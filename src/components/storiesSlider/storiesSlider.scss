@@ -1,16 +1,13 @@
 .stories-container {
-    position: relative;
-  }
-  
-  .stories {
-    position: absolute;
-    left: 50%;
-    display: flex;
-    align-items: center;
-    margin-left: -160px;
-    transition: .4s;
-  
-    @media (max-width: 374px) {
-      margin-left: -150px;
-    }
-  }
+  height: 660px;
+  position: relative;
+}
+
+.stories {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -188px;
+  transition: .4s
+}

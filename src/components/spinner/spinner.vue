@@ -5,7 +5,7 @@
   </template>
 
 <script>
-import { icon } from '../../components/icons'
+import { icon } from '../../icons'
 export default {
   components: { icon },
   props: {

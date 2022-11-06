@@ -1,7 +1,7 @@
 <template>
     <div class="story-item-wrapper" :class="{active}">
       <div class="story-item__top-container">
-          <xProgress :active="active" @on-finish="emitOnFinish"/>
+          <xProgress :active="active" @onFinish="$emit('onProgressFinish')"/>
           <user
               :usernameClass="'story-item__username'"
               :userWrapper="'story-item__user-wrapper'"
@@ -9,7 +9,6 @@
               :avatarUrl="data.userAvatar"
               :avatarImg="'story-item__avatar-img'"
               :username="data.username"
-              @onPress="handlePress(story.id)"
               :isShown="true"
           />
         </div>
@@ -30,12 +29,12 @@
           <xButton followState="Follow"/>
         </div>
         <template v-if="active">
-          <button class="btn btn-next">
+          <button v-if="btnsShown.includes('next')" class="arrow btn-next" @click="$emit('onNextSlide')">
             <span class="icon">
               <icon name="arrow" />
             </span>
           </button>
-          <button class="btn btn-prev">
+          <button v-if="btnsShown.includes('prev')" class="arrow btn-prev" @click="$emit('onPrevSlide')">
             <span class="icon">
               <icon name="arrow" />
             </span>
@@ -50,6 +49,8 @@ import profiles from '../../pages/feeds/data.json'
 import { user } from '../user'
 import { xButton } from '../button'
 import { placeholder } from '../placeholder'
+import { icon } from '../../icons'
+import { spinner } from '../spinner'
 
 export default {
   name: 'StoryItem',
@@ -57,11 +58,22 @@ export default {
     xProgress,
     user,
     xButton,
-    placeholder
+    placeholder,
+    icon,
+    spinner
   },
+  emits: ['onPrevSlide', 'onNextSlide', 'onFinish'],
   props: {
     active: Boolean,
+    startProgress: Boolean,
     loading: Boolean,
+    btnsShown: {
+      type: Array,
+      default: () => ['next', 'prev'],
+      validator (value) {
+        return value.every((item) => item === 'next' || item === 'prev')
+      }
+    },
     data: {
       type: Object,
       required: true,
@@ -72,12 +84,6 @@ export default {
     return {
       profiles,
       profile: profiles[3]
-    }
-  },
-  emits: ['onFinish'],
-  methods: {
-    emitOnFinish () {
-      this.$emit('onFinish')
     }
   }
 }

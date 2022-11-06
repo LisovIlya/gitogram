@@ -1,10 +1,16 @@
 <template>
     <div class="c-stories-slider">
         <div class="stories-container">
-            <pre>{{trendings}}</pre>
-            <ul class="stories" ref="slider">
-                <li class="stories-item" v-for="(trending) in trendings" :key="trending.id">
-                    <story-item active />
+            <ul class="stories" ref="stories">
+                <li class="stories-item" ref="trending" v-for="(trending, index) in trendings" :key="trending.id">
+                    <story-item
+                      :data="getStoryData(trending)"
+                      :active="storyIndex === index"
+                      :btnsShown="activeBtns"
+                      @onNextSlide="handleSlide(index + 1)"
+                      @onPrevSlide="handleSlide(index - 1)"
+                      @onProgressFinish="handleSlide(index + 1)"
+                    />
                 </li>
             </ul>
         </div>
@@ -21,17 +27,23 @@ export default {
     storyItem
   },
   data () {
-    return {}
+    return {
+      storyIndex: 0,
+      storiesPosition: 0
+    }
   },
   computed: {
     ...mapState({
-      trendings: state => state.trendings.data
-    })
+      trendings: (state) => state.trendings.trendings
+    }),
+    activeBtns () {
+      if (this.storyIndex === 0) return ['next']
+      if (this.storyIndex === this.trendings.length - 1) return ['prev']
+      return ['next', 'prev']
+    }
   },
   methods: {
-    ...mapActions({
-      getTrendings: 'trendings/getTrendings'
-    }),
+    ...mapActions('trendings', ['fetchTrendings']),
     getStoryData (obj) {
       return {
         id: obj.id,
@@ -39,10 +51,26 @@ export default {
         username: obj.owner?.login,
         content: obj.readme
       }
+    },
+    goToSlide (currentIndex) {
+      const { stories, trending } = this.$refs
+      const storyWidth = parseInt(getComputedStyle(trending[0]).width, 10)
+
+      this.storyIndex = currentIndex
+      this.storiesPosition = -(storyWidth * currentIndex)
+
+      stories.style.transform = `translateX(${this.storiesPosition}px)`
+    },
+    handleSlide (currentIndex) {
+      if (currentIndex < this.trendings.length) {
+        this.goToSlide(currentIndex)
+      } else {
+        this.$emit('noMoreSlides')
+      }
     }
   },
   async created () {
-    await this.getTrendings()
+    await this.fetchTrendings()
   }
 }
 
