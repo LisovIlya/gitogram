@@ -62,7 +62,7 @@ export default {
     icon,
     spinner
   },
-  emits: ['onPrevSlide', 'onNextSlide', 'onFinish'],
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
   props: {
     active: Boolean,
     startProgress: Boolean,

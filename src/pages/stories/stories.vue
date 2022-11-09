@@ -3,17 +3,17 @@
         <div class="topline-container">
           <topline>
               <template #headline>
-                  <button class="logo">
+                  <button class="logo" @click="$router.push({name: 'feeds'})">
                     <icon name="logo" />
                   </button>
-                  <button class="close-btn">
+                  <button class="close-btn" @click="print($route)">
                     <icon name="close" />
                   </button>
               </template>
           </topline>
         </div>
         <div class="content">
-          <stories-slider />
+          <stories-slider :initialSlide="Number($route.params.initialSlide)" />
         </div>
     </div>
 </template>
@@ -29,6 +29,12 @@ export default {
     topline,
     icon,
     storiesSlider
+  },
+  props: ['initialSlide'],
+  methods: {
+    print (id) {
+      console.log(id)
+    }
   }
 }
 </script>

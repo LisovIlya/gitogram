@@ -6,6 +6,7 @@
                     <story-item
                       :data="getStoryData(trending)"
                       :active="storyIndex === index"
+                      :loading="storyIndex === index && loading"
                       :btnsShown="activeBtns"
                       @onNextSlide="handleSlide(index + 1)"
                       @onPrevSlide="handleSlide(index - 1)"
@@ -26,10 +27,17 @@ export default {
   components: {
     storyItem
   },
+  props: {
+    initialSlide: {
+      type: Number
+    }
+  },
   data () {
     return {
       storyIndex: 0,
-      storiesPosition: 0
+      storiesPosition: 0,
+      loading: false,
+      btnsShown: true
     }
   },
   computed: {
@@ -37,13 +45,14 @@ export default {
       trendings: (state) => state.trendings.trendings
     }),
     activeBtns () {
+      if (this.btnsShown === false) return []
       if (this.storyIndex === 0) return ['next']
       if (this.storyIndex === this.trendings.length - 1) return ['prev']
       return ['next', 'prev']
     }
   },
   methods: {
-    ...mapActions('trendings', ['fetchTrendings']),
+    ...mapActions('trendings', ['fetchTrendings', 'fetchReadme']),
     getStoryData (obj) {
       return {
         id: obj.id,
@@ -51,6 +60,10 @@ export default {
         username: obj.owner?.login,
         content: obj.readme
       }
+    },
+    async fetchReadmeForActiveStory () {
+      const { id, owner, name } = this.trendings[this.storyIndex]
+      await this.fetchReadme({ id, owner: owner.login, repo: name })
     },
     goToSlide (currentIndex) {
       const { stories, trending } = this.$refs
@@ -64,13 +77,35 @@ export default {
     handleSlide (currentIndex) {
       if (currentIndex < this.trendings.length) {
         this.goToSlide(currentIndex)
+        this.loadReadme()
       } else {
         this.$emit('noMoreSlides')
       }
+    },
+    async loadReadme () {
+      this.loading = true
+      this.btnsShown = false
+      try {
+        await this.fetchReadmeForActiveStory()
+      } catch (error) {
+        console.log(error)
+        throw error
+      } finally {
+        this.loading = false
+        this.btnsShown = true
+      }
     }
   },
-  async created () {
+  async mounted () {
+    if (this.initialSlide) {
+      console.log(this.initialSlide)
+      const ndx = this.trendings.findIndex(
+        (item) => item.id === this.initialSlide
+      )
+      await this.handleSlide(ndx)
+    }
     await this.fetchTrendings()
+    await this.loadReadme()
   }
 }
 

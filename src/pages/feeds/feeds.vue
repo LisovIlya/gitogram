@@ -1,26 +1,22 @@
 <template>
-    <div>{{isFemale}}</div>
-    <h1 v-if="user.loading">loading...</h1>
-    <h1 v-else-if="user.error">{{ user.error }}</h1>
-    <pre v-else-if="user.data">{{user.data}}</pre>
     <div class="topline">
         <topline>
             <template #headline>
-                <button @click="trigger" class="logo">
+                <button class="logo">
                   <icon name="logo" />
                 </button>
-                <control :avatarUrl="items[1].owner.avatar_url"/>
+                <control :avatarUrl="''"/>
             </template>
             <template #content>
                 <ul class="stories">
-                    <li class="stories-item story" v-for="item in items" :key="item.id" >
+                    <li class="stories-item story" v-for="{id, owner} in items" :key="id" >
                         <user
                             :avatarWrapper="'story__avatar-wrapper'"
-                            :avatarUrl="item.owner.avatar_url"
+                            :avatarUrl="owner.avatar_url"
                             :avatarImg="'story__avatar-img'"
-                            :username="item.owner.login"
-                            @onPress="handlePress(item.id)"
+                            :username="owner.login"
                             :isShown="true"
+                            @onPress="$router.push({name: 'stories', params: { initialSlide: id } })"
                         />
                     </li>
                 </ul>
@@ -55,7 +51,7 @@ import { icon } from '../../icons'
 import { post } from '../../components/post'
 import { actions } from '../../components/actions'
 import * as api from '../../api'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'feeds',
@@ -77,17 +73,13 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.user.user
-    }),
-    ...mapGetters({
-      isFemale: 'user/getIfUserIsFemale'
+      trendings: (state) => state.trendings.trendings
     })
   },
   methods: {
-    ...mapActions('user', ['fetchUser', 'fetchMethod']),
-    trigger () {
-      this.fetchMethod('Hello World')
-      this.fetchUser()
+    ...mapActions('trendings', ['fetchTrendings']),
+    printInitialSlide (id) {
+      console.log(id)
     }
   },
   async created () {
@@ -97,8 +89,11 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+  mounted () {
+    this.fetchTrendings()
   }
 }
 </script>
 
-<style lang="scss" src="./feeds.scss" scoped></style>
+<style lang="scss" src="./feeds.scss"></style>
