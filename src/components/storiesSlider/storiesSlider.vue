@@ -11,6 +11,8 @@
                       @onNextSlide="handleSlide(index + 1)"
                       @onPrevSlide="handleSlide(index - 1)"
                       @onProgressFinish="handleSlide(index + 1)"
+                      @onFollow="starRepo"
+                      @onUnFollow="unStarRepo"
                     />
                 </li>
             </ul>
@@ -42,7 +44,8 @@ export default {
   },
   computed: {
     ...mapState({
-      trendings: (state) => state.trendings.trendings
+      trendings: (state) => state.trendings.trendings,
+      starred: (state) => state.starred.data
     }),
     activeBtns () {
       if (this.btnsShown === false) return []
@@ -52,13 +55,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions('trendings', ['fetchTrendings', 'fetchReadme']),
+    ...mapActions('trendings', ['fetchTrendings', 'fetchReadme', 'starRepo', 'unStarRepo']),
     getStoryData (obj) {
       return {
         id: obj.id,
         userAvatar: obj.owner?.avatar_url,
         username: obj.owner?.login,
-        content: obj.readme
+        content: obj.readme,
+        following: obj.following
       }
     },
     async fetchReadmeForActiveStory () {

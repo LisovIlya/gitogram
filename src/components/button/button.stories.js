@@ -6,6 +6,12 @@ export default {
   argTypes: {
     followState: {
       control: { type: 'text' }
+    },
+    loading: {
+      control: { type: 'boolean' }
+    },
+    disable: {
+      control: { type: 'boolean' }
     }
   }
 }

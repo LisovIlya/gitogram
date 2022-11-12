@@ -9,7 +9,7 @@
             </template>
             <template #content>
                 <ul class="stories">
-                    <li class="stories-item story" v-for="{id, owner} in items" :key="id" >
+                    <li class="stories-item story" v-for="{id, owner} in getUnstarredOnly" :key="id" >
                         <user
                             :avatarWrapper="'story__avatar-wrapper'"
                             :avatarUrl="owner.avatar_url"
@@ -24,7 +24,7 @@
         </topline>
     </div>
     <ul class="feeds">
-      <li class="feed" v-for="item in items" :key="item.id">
+      <li class="feed" v-for="item in starred" :key="item.id">
         <post
         :avatarUrl="item.owner.avatar_url"
         :username="item.owner.login"
@@ -51,7 +51,7 @@ import { icon } from '../../icons'
 import { post } from '../../components/post'
 import { actions } from '../../components/actions'
 import * as api from '../../api'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'feeds',
@@ -73,14 +73,16 @@ export default {
   },
   computed: {
     ...mapState({
-      trendings: (state) => state.trendings.trendings
-    })
+      trendings: (state) => state.trendings.trendings,
+      starred: (state) => state.starred.data
+    }),
+    ...mapGetters(['getUnstarredOnly'])
   },
   methods: {
-    ...mapActions('trendings', ['fetchTrendings']),
-    printInitialSlide (id) {
-      console.log(id)
-    }
+    ...mapActions({
+      fetchTrendings: 'trendings/fetchTrendings',
+      fetchStarred: 'starred/fetchStarred'
+    })
   },
   async created () {
     try {
@@ -92,6 +94,7 @@ export default {
   },
   mounted () {
     this.fetchTrendings()
+    this.fetchStarred()
   }
 }
 </script>

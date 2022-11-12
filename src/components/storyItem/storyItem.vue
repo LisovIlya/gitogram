@@ -26,7 +26,11 @@
           </div>
         </div>
         <div class="story-item__bottom-container">
-          <xButton followState="Follow"/>
+          <xButton
+          :disable="data.following.status"
+          :loading="data.following.loading"
+          @click="$emit(data.following.status ? 'onUnFollow' : 'onFollow', data.id)"
+          :followState="data.following.status ? 'Unfollow' : 'Follow'"/>
         </div>
         <template v-if="active">
           <button v-if="btnsShown.includes('next')" class="arrow btn-next" @click="$emit('onNextSlide')">
@@ -62,7 +66,7 @@ export default {
     icon,
     spinner
   },
-  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish', 'onFollow'],
   props: {
     active: Boolean,
     startProgress: Boolean,

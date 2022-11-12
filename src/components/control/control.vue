@@ -10,7 +10,9 @@
           />
         </div>
         <div class="control-item signout">
-          <icon name="signout" />
+          <button class="signout" @click="logout">
+            <icon name="signout" />
+          </button>
         </div>
     </div>
 </template>
@@ -18,6 +20,7 @@
 <script>
 import { icon } from '../../icons'
 import { user } from '../user'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'control',
@@ -30,6 +33,23 @@ export default {
   components: {
     icon,
     user
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.user.data
+    }),
+    ...mapGetters({
+      hasUser: 'user/hasUser'
+    })
+  },
+  methods: {
+    ...mapActions({
+      logout: 'auth/logout',
+      getUserData: 'user/getUserData'
+    })
+  },
+  created () {
+    this.getUserData()
   }
 }
 </script>

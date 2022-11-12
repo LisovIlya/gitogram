@@ -10,4 +10,22 @@
     &:hover {
         background: #9E9E9E;
     }
+    &.disable {
+        background: #9E9E9E;
+    }
+    &.auth {
+        min-width: 250px;
+    }
+}
+
+.btn-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

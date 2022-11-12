@@ -1,0 +1,59 @@
+.github-logo {
+    height: 24px;
+    width: 24px;
+    color: white;
+    margin-left: 12px;
+}
+
+.auth-logo{
+    width: 200px;
+    margin-bottom: 24px;
+}
+
+.tagline {
+    width: 256px;
+    text-align: start;
+    font-size: 18px;
+    margin-bottom: 54px;
+}
+
+.auth-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 142px;
+}
+
+.auth-top {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.auth-img {
+    max-width: 1008px;
+    height: 591px;
+    right: 317px;
+    transform: translateX(317px);
+}
+
+.img-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.auth-bottom {
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
